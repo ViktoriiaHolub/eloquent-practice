@@ -38,3 +38,73 @@ console.log(textWithTwoRows);
 let symbolForLineFeed = 'A newline character is written like "\\n".';
 console.log(symbolForLineFeed);
 // 'A newline character is written like "\n".';
+
+// Chapter: 2 Program Structure
+let result = 1;
+let counter = 0;
+
+while (result < 15) result *= 2;
+console.log("result", result);
+
+while (counter < 10) {
+  counter += 1;
+  result *= 2;
+}
+console.log("result", result);
+
+do {
+  var userName = "User1";
+} while (!userName);
+console.log(userName);
+
+/* the 
+  second 
+  type
+  of 
+  comments
+*/
+
+// Task 1 Looping a triangle
+let hashList = "#";
+for (let hash = 1; hash <= 7; hash++) {
+  // method 1
+  // let hashLine = hashList.repeat(hash);
+  // method 2
+  console.log(hashList);
+  hashList += "#";
+}
+
+// Task 2 FizzBuzz
+for (let num = 1; num <= 100; num++) {
+  const cond1 = num % 3 === 0;
+  const cond2 = num % 5 === 0;
+
+  if (cond1 && cond2) {
+    console.log("Fizz Buzz");
+  } else if (cond1) {
+    console.log("Fizz");
+  } else if (cond2) {
+    console.log("Buzz");
+  } else {
+    console.log(num);
+  }
+}
+
+// Task 3 Chessboard
+const boardLength = 8;
+for (let chessLine = 0; chessLine < boardLength; chessLine++) {
+  let board = "";
+  const hash = "#";
+  const space = " ";
+
+  for (let size = 0; size < boardLength / 2; size++) {
+    if (chessLine % 2 === 0) {
+      board += hash + space;
+    } else {
+      board += space + hash;
+    }
+  }
+  board += "\n";
+
+  console.log(board);
+}
