@@ -311,5 +311,54 @@ function printFarmInventory3(cows, chickens, pigs) {
   console.log(`${zeroPad(chickens, 3)} Chickens`);
   console.log(`${zeroPad(pigs, 3)} Pigs`);
 }
-
 printFarmInventory3(7, 16, 3);
+
+// Task 1: Minimum
+function min(...args) {
+  const minNumber = Math.min(...args);
+  return minNumber;
+}
+console.log(min(10, 2, -1));
+console.log(min(0, 10));
+console.log(min(0, -10));
+
+// Task 2: Recursion
+function isEven(num) {
+  if (num === 0) {
+    return true;
+  } else if (num % 2 !== 0) {
+    return false;
+  } else {
+    return isEven(num - 2);
+  }
+}
+console.log(isEven(50));
+console.log(isEven(75));
+console.log(isEven(-1));
+
+// Task 3: Bean Counting
+function countBs(str) {
+  let countLetterB = 0;
+  for (let letter = 0; letter < str.length; letter++) {
+    let currentLetter = str.charAt(letter);
+    if (currentLetter.toLowerCase() === "b") {
+      countLetterB += 1;
+    }
+  }
+  return countLetterB;
+}
+console.log(countBs("barBara"));
+console.log(countBs("BBC"));
+
+function countChar(str, specifiedLetter) {
+  let countLetter = 0;
+  for (let letter = 0; letter < str.length; letter++) {
+    let currentLetter = str.charAt(letter);
+    if (currentLetter.toLowerCase() === specifiedLetter.toLowerCase()) {
+      countLetter += 1;
+    }
+  }
+  return countLetter;
+}
+console.log(countChar("Parallelepiped", "p"));
+console.log(countChar("kakkerlak", "k"));
