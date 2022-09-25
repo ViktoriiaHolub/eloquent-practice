@@ -108,3 +108,208 @@ for (let chessLine = 0; chessLine < boardLength; chessLine++) {
 
   console.log(board);
 }
+
+// Chapter: 3 Functions
+const square = function (x) {
+  return x * x;
+};
+
+console.log(square(10));
+
+const makeNoise = function () {
+  console.log("Pling");
+};
+console.log(makeNoise()); // Pling / undefined
+
+const power = function (base, exponent) {
+  let result = 1;
+  for (let count = 0; count < exponent; count++) {
+    result *= base;
+  }
+
+  return result;
+};
+console.log(power(2, 10));
+
+let x = 10;
+var three = 3;
+if (true) {
+  let y = 20;
+  var z = 30;
+  var three = "three";
+  console.log(x + y + z); // 60
+}
+// y isn't visible here
+console.log(x + z); // 40
+console.log(three); // three
+
+var b = "outside";
+const f1 = function () {
+  var b = "inside f1";
+};
+f1();
+console.log(b); // outside
+
+const f2 = function () {
+  b = "inside f2";
+};
+f2();
+console.log(b); // inside f2
+
+const landscape = function () {
+  let result = "";
+  const flat = function (size) {
+    for (let count = 0; count < size; count++) {
+      result += "_";
+    }
+  };
+
+  const mountain = function (size) {
+    result += "/";
+    for (let count = 0; count < size; count++) {
+      result += "'";
+    }
+    result += "\\";
+  };
+
+  flat(3);
+  mountain(4);
+  flat(6);
+  mountain(1);
+  flat(1);
+
+  return result;
+};
+console.log(landscape());
+
+let launchMissiles = function () {
+  missileSystem.launch("now");
+};
+let safeMode = false;
+if (safeMode) {
+  launchMissiles = function () {
+    // do nothing
+  };
+}
+
+const power2 = (base, exponent) => {
+  let result = 1;
+  for (let count = 0; count < exponent; count++) {
+    result *= base;
+  }
+  return result;
+};
+
+const square2 = (x) => x * x;
+console.log(square2(4, true, "hedgehog")); // 16
+
+function minus(a, b) {
+  if (b === undefined) return -a;
+  else return a - b;
+}
+console.log(minus(10)); // -10
+console.log(minus(10, 5)); // 5
+
+function power3(base, exponent = 2) {
+  let result = 1;
+  for (let count = 0; count < exponent; count++) {
+    result *= base;
+  }
+  return result;
+}
+console.log(power3(4)); // 16
+console.log(power3(2, 6)); // 64
+
+// closure
+function wrapValue(n) {
+  const local = n;
+  return () => local;
+}
+const wrap1 = wrapValue(10);
+const wrap2 = wrapValue(20);
+console.log(wrap1()); // 10
+console.log(wrap2()); // 20
+
+function multiplier(factor) {
+  return (number) => number * factor;
+}
+
+let twice = multiplier(2); // for number
+console.log(twice(5)); // for factor // 10
+
+function power4(base, exponent) {
+  if (exponent == 0) {
+    return 1;
+  } else {
+    return base * power4(base, exponent - 1);
+  }
+}
+console.log(power4(2, 3)); // 8
+
+function findSolution(target) {
+  function find(current, history) {
+    if (current == target) {
+      return history;
+    } else if (current > target) {
+      return null;
+    } else {
+      return (
+        find(current + 5, `(${history} + 5)`) ||
+        find(current * 3, `(${history} * 3)`)
+      );
+    }
+  }
+  return find(1, "1");
+}
+console.log(findSolution(24)); // (((1 * 3) + 5) * 3)
+
+// refactoring code with 2 steps
+// initial variant
+function printFarmInventory(cows, chickens) {
+  let cowString = String(cows);
+  while (cowString.length < 3) {
+    cowString = "0" + cowString;
+  }
+  console.log(`${cowString} Cows`);
+
+  let chickenString = String(chickens);
+  while (chickenString.length < 3) {
+    chickenString = "0" + chickenString;
+  }
+  console.log(`${chickenString} Chickens`);
+}
+
+printFarmInventory(7, 11); // 007 Cows 011 Chickens
+
+// 1st step
+function printZeroPaddedWithLabel(number, label) {
+  let numberString = String(number);
+  while (numberString.length < 3) {
+    numberString = "0" + numberString;
+  }
+  console.log(`${numberString} ${label}`);
+}
+
+function printFarmInventory2(cows, chickens, pigs) {
+  printZeroPaddedWithLabel(cows, "Cows");
+  printZeroPaddedWithLabel(chickens, "Chickens");
+  printZeroPaddedWithLabel(pigs, "Pigs");
+}
+printFarmInventory2(7, 11, 3);
+
+// 2nd step
+function zeroPad(number, width) {
+  let string = String(number);
+  while (string.length < width) {
+    string = "0" + string;
+  }
+  return string;
+}
+
+function printFarmInventory3(cows, chickens, pigs) {
+  console.log(`${zeroPad(cows, 3)} Cows`);
+  console.log(`${zeroPad(chickens, 3)} Chickens`);
+  console.log(`${zeroPad(pigs, 3)} Pigs`);
+}
+
+printFarmInventory3(7, 16, 3);
